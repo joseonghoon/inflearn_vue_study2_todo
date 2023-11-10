@@ -1,13 +1,22 @@
 <template>
-  <div>
+  <div :class="{ 'dark-mode': isDarkMode }">
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
-        <span class="checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
-        v-on:click="toggleComplete({todoItem, index})">
+      <li
+        v-for="(todoItem, index) in this.storedTodoItems"
+        v-bind:key="todoItem.item"
+        class="shadow"
+      >
+        <span
+          class="checkBtn"
+          v-bind:class="{ checkBtnCompleted: todoItem.completed }"
+          v-on:click="toggleComplete({ todoItem, index })"
+        >
           <i class="fas fa-check"></i>
         </span>
-        <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
-        <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
+        <span v-bind:class="{ textCompleted: todoItem.completed }">{{
+          todoItem.item
+        }}</span>
+        <span class="removeBtn" v-on:click="removeTodo({ todoItem, index })">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -16,18 +25,30 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
+  data() {
+    return {
+      isDarkMode: false,
+    };
+  },
   methods: {
     ...mapMutations({
-      removeTodo: 'removeOneItem',
-      toggleComplete: 'toggleOneItem'
-    })
+      removeTodo: "removeOneItem",
+      toggleComplete: "toggleOneItem",
+    }),
   },
   computed: {
-    ...mapGetters(['storedTodoItems'])
-  }
+    ...mapGetters(["storedTodoItems"]),
+  },
+  mounted() {
+    // 컴포넌트가 생성될 때 로컬 스토리지에서 값을 불러와 data에 할당
+    const storedValue = localStorage.getItem("isDarkMode");
+    if (storedValue !== null) {
+      this.isDarkMode = JSON.parse(storedValue);
+    }
+  },
 };
 </script>
 
@@ -47,9 +68,12 @@ li {
   margin: 0.5rem 0;
   padding: 0 0.9rem;
   background: white;
-  /* background: #333;
-  color: white; */
   border-radius: 20px;
+}
+
+.dark-mode li {
+  background: #333;
+  color: white;
 }
 .removeBtn {
   margin-left: auto;
@@ -69,10 +93,12 @@ li {
 }
 
 /* 리스트 아이템 트랜지션 효과 */
-.list-enter-active, .list-leave-active {
+.list-enter-active,
+.list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-to{
+.list-enter,
+.list-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }

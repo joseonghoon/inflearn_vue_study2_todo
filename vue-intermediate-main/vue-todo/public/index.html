@@ -27,6 +27,17 @@
   <!-- built files will be auto injected -->
 </body>
 
+<script>
+  // 컴포넌트가 생성될 때 로컬 스토리지에서 값을 불러와 배경색 설정
+  const storedValue = localStorage.getItem("isDarkMode");
+  if (storedValue !== null) {
+    const isDarkMode = JSON.parse(storedValue);
+    document.body.style.backgroundColor = isDarkMode ? 'black' : '#f6f6f6';
+    document.documentElement.style.backgroundColor = isDarkMode ? 'black' : '#f6f6f6';
+    document.getElementById('theme-color').setAttribute('content', isDarkMode ? '#000000' : '#f6f6f6');
+  }
+</script>
+
 <style>
   html, body, theme-color {
     background-color: #f6f6f6;

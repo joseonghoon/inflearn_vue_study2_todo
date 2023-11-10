@@ -1,56 +1,62 @@
 <template>
-  <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo" placeholder="Input Your List" />
+  <div class="inputBox shadow" :class="{ 'dark-mode': isDarkMode }">
+    <input
+      type="text"
+      v-model="newTodoItem"
+      v-on:keyup.enter="addTodo"
+      placeholder="Input Your List"
+    />
     <!-- <button v-on:click="addTodo">add</button> -->
     <span class="addContainer" v-on:click="addTodo">
       <i class="fas fa-plus addBtn"></i>
     </span>
 
-    <AlertModal v-if="showModal" @close="showModal = false">
+    <!-- <AlertModal v-if="showModal" @close="showModal = false">
       <h3 slot="header">
         내용을 입력하세요.
       </h3>
       <div slot="body" @click="showModal = false">
         <button>확인</button>
       </div>
-    </AlertModal>
+    </AlertModal> -->
   </div>
 </template>
 
 <script>
-import AlertModal from "./common/AlertModal.vue";
+// import AlertModal from "./common/AlertModal.vue";
 
 export default {
   data() {
     return {
       newTodoItem: "",
-      showModal: false
+      showModal: false,
+      isDarkMode: false,
     };
   },
   methods: {
     addTodo() {
       if (this.newTodoItem !== "") {
         // this.$emit('이벤트 이름', 인자1, 인자2...)
-        this.$store.commit('addOnItem', this.newTodoItem);
+        this.$store.commit("addOnItem", this.newTodoItem);
         this.clearInput();
       } else {
-        this.showModal = !this.showModal
+        this.showModal = !this.showModal;
       }
     },
     clearInput() {
       this.newTodoItem = "";
     },
   },
-  components: {
-    AlertModal
-  },
+  // components: {
+  //   AlertModal
+  // },
   mounted() {
-      // 컴포넌트가 생성될 때 로컬 스토리지에서 값을 불러와 data에 할당
-      const storedValue = localStorage.getItem('isDarkMode');
-      if (storedValue !== null) {
-        this.darkMode = JSON.parse(storedValue);
-      }
-    },
+    // 컴포넌트가 생성될 때 로컬 스토리지에서 값을 불러와 data에 할당
+    const storedValue = localStorage.getItem("isDarkMode");
+    if (storedValue !== null) {
+      this.isDarkMode = JSON.parse(storedValue);
+    }
+  },
 };
 </script>
 
@@ -60,11 +66,14 @@ input:focus {
 }
 .inputBox {
   background: white;
-  /* background: #333; */
   height: 50px;
   line-height: 50px;
   border-radius: 20px;
   margin: 0 20px;
+}
+
+.dark-mode .inputBox {
+  background: #333;
 }
 .inputBox input {
   height: 40px;
@@ -72,9 +81,12 @@ input:focus {
   border-style: none;
   font-size: 0.9rem;
   margin-left: 20px;
-  /* background: #333;
-  color: white; */
 }
+
+/* .dark-mode input {
+  background: #333;
+  color: white;
+} */
 
 .addContainer {
   float: right;
