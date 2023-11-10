@@ -60,12 +60,15 @@
 
 .modal-body {
   margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-body button {
   color: red;
   width: 5rem;
-  height: 2rem;
+  height: fit-content;
   border-radius: 20px;
   background: #fff;
 }

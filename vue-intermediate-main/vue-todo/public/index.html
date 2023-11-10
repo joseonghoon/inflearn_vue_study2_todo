@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="theme-color" content="#f6f6f6" id="theme-color">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <link rel="manifest" href="/manifest.json">
   <link rel="shortcut icon" href="../src/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="../src/assets/favicon.ico" type="image/x-icon">
   <script defer src="https://use.fontawesome.com/releases/v6.1.2/js/all.js" integrity="sha384-11X1bEJVFeFtn94r1jlvSC7tlJkV2VJctorjswdLzqOJ6ZvYBSZQkaQVXG0R4Flt" crossorigin="anonymous"></script>
@@ -12,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
   <title>
-    <%= htmlWebpackPlugin.options.title %>
+    ToDo-List
   </title>
 </head>
 
@@ -24,5 +26,12 @@
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>
+
+<style>
+  html, body, theme-color {
+    background-color: #f6f6f6;
+    /* background-color: black; */
+  }
+</style>
 
 </html>

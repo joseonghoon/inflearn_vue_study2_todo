@@ -37,6 +37,7 @@ ul {
   padding-left: 0px;
   margin-top: 0;
   text-align: left;
+  margin: 0 20px;
 }
 li {
   display: flex;
@@ -46,6 +47,8 @@ li {
   margin: 0.5rem 0;
   padding: 0 0.9rem;
   background: white;
+  /* background: #333;
+  color: white; */
   border-radius: 20px;
 }
 .removeBtn {

@@ -1,7 +1,9 @@
 <template>
   <header>
     <h1>ToDo</h1>
-    <p>{{ currentDateWithDay }}</p>
+    <div>
+      <p>{{ currentDateWithDay }}</p>
+    </div>
   </header>
 </template>
 
@@ -22,11 +24,14 @@ export default {
 <style scoped>
 h1 {
   color: #2f3b52;
+  /* color: #848c9c; */
   font-weight: 900;
   margin: 2.5rem 0 1.5rem;
+  text-align: center;
 }
 p {
-  margin: 0 0 0.2rem;
+  margin: 0 20px 0.2rem;
   text-align: right;
+  /* color: white; */
 }
 </style>

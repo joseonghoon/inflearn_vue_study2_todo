@@ -1,6 +1,6 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo" />
+    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo" placeholder="Input Your List" />
     <!-- <button v-on:click="addTodo">add</button> -->
     <span class="addContainer" v-on:click="addTodo">
       <i class="fas fa-plus addBtn"></i>
@@ -44,6 +44,13 @@ export default {
   components: {
     AlertModal
   },
+  mounted() {
+      // 컴포넌트가 생성될 때 로컬 스토리지에서 값을 불러와 data에 할당
+      const storedValue = localStorage.getItem('isDarkMode');
+      if (storedValue !== null) {
+        this.darkMode = JSON.parse(storedValue);
+      }
+    },
 };
 </script>
 
@@ -53,19 +60,26 @@ input:focus {
 }
 .inputBox {
   background: white;
+  /* background: #333; */
   height: 50px;
   line-height: 50px;
   border-radius: 20px;
+  margin: 0 20px;
 }
 .inputBox input {
   height: 40px;
   width: 80%;
   border-style: none;
   font-size: 0.9rem;
+  margin-left: 20px;
+  /* background: #333;
+  color: white; */
 }
+
 .addContainer {
   float: right;
   background: linear-gradient(to right, #64c4fb, #159af3);
+  /* background: linear-gradient(to right, #457c9c, #0f72b4); */
   display: block;
   width: 3rem;
   border-radius: 0 5px 5px 0;

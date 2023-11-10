@@ -46,7 +46,11 @@ const mutations = {
     },
 
     clearAllItems(state) {
-        localStorage.clear();
+        const keysToKeep = Object.keys(localStorage).filter(key => key !== 'isDarkMode');
+        keysToKeep.forEach(key => {
+            localStorage.removeItem(key);
+        });
+        //localStorage.clear();
         state.todoItems = [];
     }
 };
